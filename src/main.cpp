@@ -62,22 +62,19 @@ int main(int argc, char** argv)
         parser.printErrors();
         return 1;
     }
-    VideoCapture cap;
-    if (file.empty())
-        cap.open(camera);
-    else
-    {
-        file = samples::findFileOrKeep(file);
-        cap.open(file);
-    }
+
+    VideoCapture cap("../towncentre.avi");
+
     if (!cap.isOpened())
     {
         cout << "Can not open video stream: '" << (file.empty() ? "<camera>" : file) << "'" << endl;
         return 2;
     }
+
     cout << "Press 'q' or <ESC> to quit." << endl;
     cout << "Press <space> to toggle between Default and Daimler detector" << endl;
     Detector detector;
+
     Mat frame;
     for (;;)
     {
